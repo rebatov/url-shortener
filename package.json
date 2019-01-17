@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "mkdir src/log",
     "test": "mocha --reporter spec",
     "start": "node server.js"
   },
