@@ -1,4 +1,4 @@
-const Url = require('../models/url');
+const service = require('../services/index');
 
 const isValidUrl = require('../utils/isValidUrl')
 
@@ -28,29 +28,23 @@ const postUrl = (req, res) => {
       success: false,
     });
   }
-
-  const dbEntry = new Url(req.body);
-  dbEntry.save((err, result) => {
-    if (err) {
-      return res.status(500).send({
-        message: 'Cannot save the URL',
-        error: true,
-        success: false,
-      });
-    }
-    if (result) {
-      const code = encoder(result._id);
-      const data = {
-        code,
-        url: `${req.protocol}://${req.get('host')}/${code}`,
-      };
-      return res.status(200).send({
-        message: 'Cannot save the URL',
-        data,
-        error: false,
-        success: true,
-      });
-    }
+  const params = {
+    data: req.body,
+  }
+  service.post(params).then(result => {
+    const code = encoder(result._id);
+    const data = {
+      code,
+      url: `${req.protocol}://${req.get('host')}/${code}`,
+    };
+    return res.status(200).send({
+      message: 'Cannot save the URL',
+      data,
+      error: false,
+      success: true,
+    });
+  }).catch(err => {
+    res.status(err.code).send(err);
   });
 }
 
@@ -67,23 +61,15 @@ const getUrl = (req, res) => {
     });
   }
   const id = decoder(req.params.code);
-  Url.findOne({
-    _id: id
-  }).then(result => {
-    if (!result) {
-      return res.status(404).send({
-        message: 'Short Url does not exist',
-        error: true,
-        success: false,
-      });
+  const params = {
+    query: {
+      _id: id,
     }
+  }
+  service.get(params).then(result => {
     res.status(302).redirect(result.url);
   }).catch(err => {
-    return res.status(500).send({
-      message: 'Database query error',
-      error: true,
-      success: false,
-    });
+    res.status(err.code).send(err);
   });
 }
 

@@ -22,13 +22,14 @@ function urlSaver() {
     res.json().then(body => {
       if (res.status !== 200) {
         alert('Invalid Url');
+        return;
       }
       document.getElementById('outputUrl').style.display = 'block';
       document.getElementById('short').innerHTML = body.data.url;
     })
   }).catch(err => {
     alert('API request went wrong!')
-  })
+  });
 }
 
 /* 
