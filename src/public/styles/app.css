@@ -1,0 +1,44 @@
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+body {
+  margin: 40px;
+  align-content: center;
+  text-align: center;
+}
+
+#outputUrl {
+  display: none;
+}
+
+#openCode {
+  padding-top: 40px;
+  ;
+}
+
+#longUrl {
+  width: 300px;
+}
+
+#code {
+  width: 300px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:hover {
+  cursor: pointer;
+}

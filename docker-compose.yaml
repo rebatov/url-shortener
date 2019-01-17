@@ -1,0 +1,18 @@
+version: '3'
+services:
+  shorty:
+    build: './'
+    ports:
+      - "5000:5000"
+    links: 
+      - mongodb
+    depends_on: 
+      - mongodb
+    environment:
+      - MONGO_DB_URI=mongodb://mongodb/shorty
+  
+  mongodb:
+    image: mongo
+    container_name: "mongodb"
+    ports:
+      - "27019:27019"
