@@ -9,4 +9,4 @@
 * We could use cluster mechanism for proper balancing of the load.
 * We could use session to maintain uniqueness of the stored url.
 * We could use some kind of analytics to monitor the number of hits, requesting agent, etc. whenever the short url is accessed for better data analytics in the future.
-* We could use microservice architecture when the services get bigger and containerized approachwill be helpful for truly CloudNative deployments.
+* We could use microservice architecture when the services get bigger and containerized approach will be helpful for truly CloudNative deployments.

@@ -24,8 +24,10 @@ function urlSaver() {
         alert('Invalid Url');
         return;
       }
+      const shortUrl = body.data.url;
       document.getElementById('outputUrl').style.display = 'block';
-      document.getElementById('short').innerHTML = body.data.url;
+      document.getElementById('short').href = shortUrl;
+      document.getElementById('short').text = shortUrl;
     })
   }).catch(err => {
     alert('API request went wrong!')
