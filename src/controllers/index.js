@@ -28,10 +28,20 @@ const postUrl = (req, res) => {
       success: false,
     });
   }
+  const paramsCheck = {
+    query: {
+      url: req.body.url,
+    }
+  };
   const params = {
     data: req.body,
-  }
-  service.post(params).then(result => {
+  };
+
+
+  /* 
+  Sends if the shorted url is created successfully
+  */
+  function shortedResponse(result) {
     const code = encoder(result._id);
     const data = {
       code,
@@ -43,9 +53,18 @@ const postUrl = (req, res) => {
       error: false,
       success: true,
     });
-  }).catch(err => {
-    res.status(err.code).send(err);
-  });
+  };
+
+  service.get(paramsCheck).then(found => {
+    shortedResponse(found);
+  }).catch(notfound => {
+    service.post(params).then(result => {
+      shortedResponse(result);
+    }).catch(err => {
+      res.status(err.code).send(err);
+    });
+  })
+
 }
 
 

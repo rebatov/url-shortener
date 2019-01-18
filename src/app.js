@@ -9,6 +9,8 @@ const {
 
 app.use(bodyParser.json());
 
+app.disable('x-powered-by') // Cannot easily identify if it is express server.
+
 app.use(express.static(`${__dirname}/public`))
 
 // app.get('/', (req, res) => {
